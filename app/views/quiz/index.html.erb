@@ -1,13 +1,41 @@
-<div class="row">
-  <div class="col text-center">
-    <h1>
-      Welcome to the Trivia Game
-    </h1>
-    <h4>Got friends? Join the fun at lxnxtrivia.com/join</h4>
+<div class="quiz-start-wrapper">
+  <div class="row">
+    <div class="col text-center">
+      <h1>Select Your Character</h1>
+    </div>
   </div>
-</div>
-<div class="row">
-  <div class="col">
-    <a href="/quiz/start" type="button" class="btn btn-primary btn-lg btn-block">Play</a>
-  </div>
+  <%= form_tag('/quiz/start', method: 'get') do %>
+      <div class="row">
+        <div class="col">
+          <label>
+            <%= radio_button_tag 'character', 'first' %>
+            <%= image_tag('1.jpg', class: "img-circle m-x-auto d-block", size: "200x200") %>
+          </label>
+        </div>
+        <div class="col">
+          <label>
+            <%= radio_button_tag 'character', 'second' %>
+            <%= image_tag('2.jpg', class: "img-circle m-x-auto d-block", size: "200x200") %>
+          </label>
+        </div>
+        <div class="col">
+          <label>
+            <%= radio_button_tag 'character', 'third' %>
+            <%= image_tag('3.jpg', class: "img-circle m-x-auto d-block", size: "200x200") %>
+          </label>
+        </div>
+        <div class="col">
+          <label>
+            <%= radio_button_tag 'character', 'fourth' %>
+            <%= image_tag('4.jpg', class: "img-circle m-x-auto d-block", size: "200x200") %>
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+
+          <%= submit_tag 'Ready', :name => nil, class: '"btn btn-primary btn-lg btn-block' %>
+        </div>
+      </div>
+  <% end %>
 </div>

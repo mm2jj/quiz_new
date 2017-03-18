@@ -1,16 +1,1 @@
-<div class="row">
-  <div class="col text-center">
-    <h1>Select Your Character</h1>
-  </div>
-</div>
-<div class="row">
-  <div class="col"><%= image_tag('1.jpg', class:"img-circle m-x-auto d-block", size: "200x200") %></div>
-  <div class="col"> <%= image_tag('2.jpg', class:"img-circle m-x-auto d-block", size: "200x200") %></div>
-  <div class="col"> <%= image_tag('3.jpg', class:"img-circle m-x-auto d-block", size: "200x200") %></div>
-  <div class="col"> <%= image_tag('4.jpg', class:"img-circle m-x-auto d-block", size: "200x200") %></div>
-</div>
-<div class="row">
-  <div class="col">
-    <a href="/quiz/start" type="button" class="btn btn-primary btn-lg btn-block">Ready</a>
-  </div>
-</div>
+<h1><%= @user.code %></h1>
