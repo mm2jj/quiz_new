@@ -16,10 +16,23 @@ class QuizController < ApplicationController
 
   def start
     @user = current_user
-    @user.save(name: params[:character])
+    @users = User.all
+    @user.update(name: params[:character]) if params[:character]
+  end
+
+  def question
+
   end
 
   def join
+  end
+
+  def refresh_users
+    @users = User.all
+
+    respond_to do |format|
+      format.js
+    end
   end
 
   def end
@@ -31,7 +44,8 @@ class QuizController < ApplicationController
   private
 
   def check_game_state
-    redirect_to action: 'join' if @@in_progress && !current_user
+    redirect_to action: 'join' and return if @@in_progress && !current_user
+    redirect_to action: 'index' if @@in_progress && current_user
   end
 
   def check_join_code

@@ -1,1 +1,19 @@
-<h1><%= @user.code %></h1>
+<div class="row">
+  <div class="col text-center">
+    <h1><span id="time">00:30</span> </h1>
+    <% if @users.count == 1 %>
+        <h1> Game join code</h1>
+        <input type="text" class="form-control form-control-lg" value="<%= @user.code %>">
+    <% end %>
+  </div>
+</div><br>
+<div class="row">
+  <div class="col text-center">
+    <h1>Current Players</h1>
+    <div id="current-users">
+      <%= render partial: 'users', locals: {users: @users} %>
+    </div>
+  </div>
+</div>
+
+<%= javascript_include_tag "start.js" %>
