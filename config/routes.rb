@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'question/index'
+  get 'question/show'
+
   root to: 'quiz#welcome'
   get 'quiz/index'
   get 'quiz/start'

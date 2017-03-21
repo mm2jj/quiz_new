@@ -25,7 +25,7 @@ function startTimer(duration, display) {
 
         if (--timer < 0) {
             timer = duration;
-            window.location = "/quiz/question";
+            window.location = "/question/show";
         }
 
     }, 1000);
