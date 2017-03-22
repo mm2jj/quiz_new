@@ -33,9 +33,10 @@ class QuestionController < ApplicationController
 
   def end
     @correct = session[:correct]
-    current_user.update(score: @correct)
     @total = session[:total]
     @score = @correct * 100 / @total
+    user = current_user
+    user.update(score: @correct)
   end
 
   def result
