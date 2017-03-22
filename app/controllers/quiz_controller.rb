@@ -19,8 +19,9 @@ class QuizController < ApplicationController
     @users = User.all
     @user.update(name: params[:character]) if params[:character]
 
-    total = 3
-    all = Question.all.map {|x| x.id}
+    questions = Question.all
+    total = questions.count
+    all = questions.map {|x| x.id}
     session[:questions] = all.sort_by{rand}[0..(total-1)]
     session[:total] = total
     session[:current] = 0

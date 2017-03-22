@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col">
+
+    <ul class="list-unstyled">
+      <% @users.each do |user| %>
+          <li>
+            <lable>
+              <%= image_tag(user.image, class: "img-circle m-x-auto d-block", size: "200x200") %>
+              Score <%= user.score * 100 / @total%> %
+          </lable>
+          </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+

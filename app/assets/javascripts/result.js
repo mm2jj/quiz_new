@@ -1,16 +1,10 @@
 $(document).ready(function () {
     // will call refreshPartial every 3 seconds
-    setInterval(refreshPartial, 3000);
-    var thirtySeconds = 30;
+    var tenSeconds = 10;
     var display = $('#time');
-    startTimer(thirtySeconds, display);
+    startTimer(tenSeconds, display);
 });
 
-function refreshPartial() {
-    $.ajax({
-        url: "/quiz/refresh_users"
-    })
-}
 
 function startTimer(duration, display) {
     var timer = duration, minutes, seconds;
@@ -25,7 +19,7 @@ function startTimer(duration, display) {
 
         if (--timer < 0) {
             timer = duration;
-            window.location = "/question/show";
+            window.location = "/question/result";
         }
 
     }, 1000);

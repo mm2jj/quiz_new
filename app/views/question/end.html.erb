@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col text-center">
+    <h1><span id="time">00:10</span> </h1>
+    <h1>Quiz Results</h1>
+    <p id="question">You answered correctly <%= @correct %> out of <%= @total %> questions.</p>
+    <p id="score"><%= @score %>%</p>
+    <%= form_tag({:controller => "quiz", :action => "index"}, :method => "get") do %>
+        <div class="center">
+          <%= submit_tag("Take another quiz", :class => "btn btn-primary") %>
+        </div>
+    <% end %>
+    <% content_for(:title) do %>
+        Quiz Results
+    <% end %>
+  </div>
+</div>
+
+<%= javascript_include_tag "result.js" %>

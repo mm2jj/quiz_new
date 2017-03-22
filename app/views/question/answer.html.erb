@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col text-center">
+    <h1>Question <%= @current + 1 %> of <%= @total %></h1>
+    <p id="question"><%= @question.text %></p>
+    <div id="feedback-choices">
+      <% @choices.each do |choice| %>
+          <% if choice[:correct] %>
+              <p class="correct feedback-choice">
+          <% elsif choice == @choice %>
+              <p class="incorrect feedback-choice">
+          <% else %>
+              <p class="feedback-choice">
+          <% end %>
+          <%= choice[:text] %>
+          </p>
+      <% end %>
+    </div>
+    <p class="feedback">
+      <% if @correct %>
+          CORRECT!
+      <% else %>
+          INCORRECT.
+      <% end %>
+    </p>
+
+    <%= link_to 'Continue', question_show_path, class: 'btn btn-primary' %>
+    <% content_for(:title) do %>
+        Question <%= @current + 1 %> of <%= @total %>
+    <% end %>
+  </div>
+</div>
