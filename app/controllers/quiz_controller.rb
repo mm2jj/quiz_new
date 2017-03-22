@@ -3,6 +3,11 @@ class QuizController < ApplicationController
   before_filter :check_join_code, only: [:index]
 
   def welcome
+    unless @@in_progress
+      User.delete_all
+      destroy_user_session
+    end
+
     @@in_progress = true
   end
 
