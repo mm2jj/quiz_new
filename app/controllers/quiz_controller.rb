@@ -1,29 +1,31 @@
 class QuizController < ApplicationController
-  before_filter :check_game_state, only: [:welcome]
-  before_filter :check_join_code, only: [:index]
+  before_filter :get_group, except: [:welcome, :join, :index]
+  before_filter :check_group, only: [:index]
 
   def welcome
-    unless @@in_progress
-      User.delete_all
-      destroy_user_session
-    end
+    invalidate_session
+  end
 
-    @@in_progress = true
+  def join
   end
 
   def index
-    code = params[:code] || SecureRandom.hex(10)
-    unless current_user
-      user = User.create(code: code)
-      set_current_user(user)
+    if params[:code]
+      @group = Group.find_by(code: params[:code])
+    else
+      @group = Group.create(code: SecureRandom.hex(10))
     end
+    set_current_group(@group)
   end
 
   def start
-    @user = current_user
-    @users = User.all
-    @user.update(name: params[:character]) if params[:character]
+    user_params = {}
+    user_params[:name] = params[:character] if params[:character]
+    @user = User.create(user_params)
+    @group.users << @user
+    set_current_user(@user)
 
+    @users = @group.users
     questions = Question.all
     total = questions.count
     all = questions.map {|x| x.id}
@@ -34,14 +36,11 @@ class QuizController < ApplicationController
   end
 
   def question
-
   end
 
-  def join
-  end
 
   def refresh_users
-    @users = User.all
+    @users = @group.users
 
     respond_to do |format|
       format.js
@@ -49,24 +48,21 @@ class QuizController < ApplicationController
   end
 
   def end
-    User.delete_all
+    @group.users.delete_all
     destroy_user_session
-    @@in_progress = false
+    destroy_group_session
   end
 
   private
 
-  def check_game_state
-    redirect_to action: 'join' and return if @@in_progress && !current_user
-    redirect_to action: 'index' if @@in_progress && current_user
+  def get_group
+    @group = current_group
   end
 
-  def check_join_code
+  def check_group
     if params[:code]
-      user = User.find_by(code: params[:code])
-      unless user
-        redirect_to action: 'join', notice: "wrong code" and return
-      end
+      group = Group.find_by(code: params[:code])
+      redirect_to action: 'welcome', error: 'wrong code' unless group
     end
   end
 end

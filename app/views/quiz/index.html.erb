@@ -7,6 +7,8 @@
   <%= form_tag('/quiz/start', method: 'get') do %>
       <div class="row">
         <div class="col">
+          <%= hidden_field_tag 'group_id', @group.id%>
+
           <label>
             <%= radio_button_tag 'character', '1' %>
             <%= image_tag('1.jpg', class: "img-circle m-x-auto d-block", size: "200x200") %>

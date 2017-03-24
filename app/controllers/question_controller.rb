@@ -40,7 +40,6 @@ class QuestionController < ApplicationController
   end
 
   def result
-    @users = User.all
-    @@in_progress = false
+    @users = current_group.users
   end
 end
